@@ -37,7 +37,7 @@ resource "azurerm_firewall" "public" {
   }
 }
 
-resource "azurerm_network_interface" "main" {
+resource "azurerm_network_interface" "public" {
   name                = "webserver"
   location            = azurerm_resource_group.group.location
   resource_group_name = azurerm_resource_group.group.name
@@ -52,7 +52,7 @@ resource "azurerm_virtual_machine" "main" {
   name                  = var.instance_name
   location              = azurerm_resource_group.group.location
   resource_group_name   = azurerm_resource_group.group.name
-  network_interface_ids = [ azurerm_network_interface.main.id ]
+  network_interface_ids = [ azurerm_network_interface.public.id ]
   vm_size               = var.instance_size 
 
   storage_image_reference {
